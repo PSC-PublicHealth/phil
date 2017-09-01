@@ -110,13 +110,10 @@ void School::get_parameters(int diseases) {
 
 int School::get_group(int disease_id, Person * per) {
     int age = per->get_age();
-    if (age <12) {
-        return 0;
-    } else if (age < 16) {
-        return 1;
-    } else if (per->is_student()) {
-        return 2;
-    } else return 3;
+    if (age < 12) {return 0;}
+    if (age < 16) {return 1;}
+    if (per->is_student()) {return 2;}
+    return 3;
 }
 
 double School::get_transmission_prob(int disease_id, Person * i, Person * s) {

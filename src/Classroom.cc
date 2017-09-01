@@ -71,7 +71,11 @@ void Classroom::enroll(Person * per) {
 }
 
 int Classroom::get_group(int disease, Person * per) {
-    return container->get_group(disease, per);
+    int age = per->get_age();
+    if (age < 12) {return 0;}
+    if (age < 16) {return 1;}
+    if (per->is_student()) {return 2;}
+    return 3;
 }
 
 double Classroom::get_transmission_prob(int disease, Person * i, Person * s) {
