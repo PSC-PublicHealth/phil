@@ -5,9 +5,9 @@ outdir = UNIVERSAL.1
 
 #days = 360 
 #days = 720 
-days = 1080
+#days = 1080
 #days = 1440
-#days = 1800
+days = 1800
 #days = 2160
 #days = 2520
 #days = 2880
@@ -45,7 +45,7 @@ event_report_file = none
 track_vaccine_infection_events = 1
 vaccine_infection_tracker_file = vaccinf
 
-immunity_loss_mu[0] = 1080
+immunity_loss_mu[0] = 180
 immunity_loss_sigma[0] = 1
 
 enable_aging = 0
