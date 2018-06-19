@@ -172,8 +172,7 @@ int Vaccine_Priority_Decision_MultiVaccine_AgeMap_Coverage::reevaluate(Person* p
             }
         }
     }
-//    std::cout << "Target " << target_coverage << " Current " << current_coverage << std::endl;
-//    std::cout << "Age " << age << " Bin " << bin << std::endl;
+//    std::cout << "VACCINE " << vaccine_id << " Target " << target_coverage << " Current " << current_coverage << "Age " << age << " Bin " << bin << std::endl;
 //    std::map<int,double>::iterator itr;
 //    std::cout << "VACCINE " << vaccine_id << " COVERAGE:";
 //    for (itr=bin_counts.begin(); itr!=bin_counts.end(); ++itr) {

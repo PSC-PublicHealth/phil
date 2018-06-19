@@ -1,11 +1,11 @@
 #!/opt/bin/swsh -i python
 
-#swsh -m anaconda/4.3.0,pagmo/1.1.7
-#swsh -e phil_beegfs 
+#swsh -m anaconda/4.3.0
+#swsh -e phil 
 
-#PBS -l walltime={{ walltime or '00:15:00' }}
+#PBS -l walltime={{ walltime or '00:30:00' }}
 #PBS -l mem={{ mem or '4gb' }}
-#PBS -l nodes=1:ppn={{ ppn or '16' }}
+#PBS -l nodes=1:ppn={{ ppn or '8' }}
 #PBS -N {{ jobname }}
 #PBS -d {{ tempdir }}
 #PBS -o {{ stdout }}

@@ -7,10 +7,10 @@ outdir = UNIVERSAL.1
 #days = 720 
 #days = 1080
 #days = 1440
-days = 1800
+#days = 1800
 #days = 2160
 #days = 2520
-#days = 2880
+days = 2880
 
 ###############################################################################
 
@@ -63,13 +63,13 @@ vaccination_capacity_file = vaccination_capacity.txt
 
 #vaccinate_symptomatics = 0
 
-number_of_vaccines = 7
+number_of_vaccines = 9
 
 # Vaccine: 0 [UNIVERSAL VACCINE]
 vaccine_number_of_doses[0] = 1
 vaccine_total_avail[0] = 594057
-vaccine_additional_per_day[0] = 59 
-vaccine_starting_day[0] = 0
+vaccine_additional_per_day[0] = 594057
+vaccine_starting_day[0] = 1080
 # Vaccine Dose
 vaccine_next_dosage_day[0][0] = 0
 vaccine_dose_efficacy_ages[0][0] = 2 0 110
@@ -83,10 +83,10 @@ vaccine_coverage_age_map_ages[0] = 10 0 5 6 18 19 50 51 65 66 106
 vaccine_coverage_age_map_values[0] = 5 0.0795 0.2806 0.2204 0.1907 0.2289
 
 
-# Vaccine: 1
+# Vaccine: 1 [SEASONAL - BURNIN]
 vaccine_number_of_doses[1] = 1
 vaccine_total_avail[1] = 594057
-vaccine_additional_per_day[1] = 594057
+vaccine_additional_per_day[1] = 594057 
 vaccine_starting_day[1] = 0
 # Vaccine Dose
 vaccine_next_dosage_day[1][0] = 0
@@ -101,7 +101,7 @@ vaccine_coverage_age_map_ages[1] = 10 0 5 6 18 19 50 51 65 66 106
 vaccine_coverage_age_map_values[1] = 5 0.0795 0.2806 0.2204 0.1907 0.2289
 
 
-# Vaccine: 2
+# Vaccine: 2 [SEASONAL - BURNIN]
 vaccine_number_of_doses[2] = 1
 vaccine_total_avail[2] = 594057
 vaccine_additional_per_day[2] = 594057
@@ -119,7 +119,7 @@ vaccine_coverage_age_map_ages[2] = 10 0 5 6 18 19 50 51 65 66 106
 vaccine_coverage_age_map_values[2] = 5 0.0795 0.2806 0.2204 0.1907 0.2289
 
 
-# Vaccine: 3
+# Vaccine: 3 [SEASONAL - BURNIN]
 vaccine_number_of_doses[3] = 1
 vaccine_total_avail[3] = 594057
 vaccine_additional_per_day[3] = 594057
@@ -137,7 +137,7 @@ vaccine_coverage_age_map_ages[3] = 10 0 5 6 18 19 50 51 65 66 106
 vaccine_coverage_age_map_values[3] = 5 0.0795 0.2806 0.2204 0.1907 0.2289
 
 
-# Vaccine: 4
+# Vaccine: 4 [SEASONAL - RESIDUAL]
 vaccine_number_of_doses[4] = 1
 vaccine_total_avail[4] = 594057
 vaccine_additional_per_day[4] = 594057
@@ -189,5 +189,41 @@ vaccine_simple_strains[6] = 1 6
 # Vaccine Age-Specific Coverage Policy Decisions
 vaccine_coverage_age_map_ages[6] = 10 0 5 6 18 19 50 51 65 66 106
 vaccine_coverage_age_map_values[6] = 5 0.0795 0.2806 0.2204 0.1907 0.2289
+
+
+# Vaccine: 7
+vaccine_number_of_doses[7] = 1
+vaccine_total_avail[7] = 594057
+vaccine_additional_per_day[7] = 594057
+vaccine_starting_day[7] = 2160
+# Vaccine Dose
+vaccine_next_dosage_day[7][0] = 0
+vaccine_dose_efficacy_ages[7][0] = 2 0 110
+vaccine_dose_efficacy_values[7][0] = 1 0.60
+vaccine_dose_efficacy_delay_ages[7][0] = 2 0 100
+vaccine_dose_efficacy_delay_values[7][0] = 1 14
+# Vaccine Simple Strains Parameters
+vaccine_simple_strains[7] = 1 7
+# Vaccine Age-Specific Coverage Policy Decisions
+vaccine_coverage_age_map_ages[7] = 10 0 5 6 18 19 50 51 65 66 106
+vaccine_coverage_age_map_values[7] = 5 0.0795 0.2806 0.2204 0.1907 0.2289
+
+
+# Vaccine: 8
+vaccine_number_of_doses[8] = 1
+vaccine_total_avail[8] = 594057
+vaccine_additional_per_day[8] = 594057
+vaccine_starting_day[8] = 2520
+# Vaccine Dose
+vaccine_next_dosage_day[8][0] = 0
+vaccine_dose_efficacy_ages[8][0] = 2 0 110
+vaccine_dose_efficacy_values[8][0] = 1 0.60
+vaccine_dose_efficacy_delay_ages[8][0] = 2 0 100
+vaccine_dose_efficacy_delay_values[8][0] = 1 14
+# Vaccine Simple Strains Parameters
+vaccine_simple_strains[8] = 1 8
+# Vaccine Age-Specific Coverage Policy Decisions
+vaccine_coverage_age_map_ages[8] = 10 0 5 6 18 19 50 51 65 66 106
+vaccine_coverage_age_map_values[8] = 5 0.0795 0.2806 0.2204 0.1907 0.2289
 
 
