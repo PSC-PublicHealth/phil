@@ -147,7 +147,7 @@ DEPENDS: $(SRC) $(HDR)
 include DEPENDS
 
 $(SNAPPY_LIB):
-	cd $(SNAPPY_DIR); tar --strip-components=1 -xzvf snappy-1.0.5.tar.gz; CPP=$(CPP) CXX=$(CPP) ./configure --prefix=$(SNAPPY_DIR); make && make install; mv .libs lib;
+	cd $(SNAPPY_DIR); tar --strip-components=1 -xzvf snappy-1.0.5.tar.gz; CXX=$(CXX) ./configure --prefix=$(SNAPPY_DIR); make && make install; mv .libs lib;
 
 
 PHIL.tar.gz: $(SRC) $(HDR)
