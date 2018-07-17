@@ -47,7 +47,7 @@ LOGGING_PRESET_1 = -DPHILWARNING
 LOGGING_PRESET_2 = -DPHILSTATUS -DPHILWARNING
 LOGGING_PRESET_3 = -DPHILVERBOSE -DPHILSTATUS -DPHILWARNING -DPHILDEBUG
 
-DSFMT_CPPFLAGS = -g -O3 -DDSFMT_MEXP=19937 -DDSFMT_DO_NOT_USE_OLD_NAMES -finline-functions -fomit-frame-pointer -DNDEBUG \
+DSFMT_CXXFLAGS = -g -O3 -DDSFMT_MEXP=19937 -DDSFMT_DO_NOT_USE_OLD_NAMES -finline-functions -fomit-frame-pointer -DNDEBUG \
 -fno-strict-aliasing --param max-inline-insns-single=1800
 
 DSFMT_SRC = $(DSFMT_DIR)/dSFMT.c
@@ -131,7 +131,7 @@ PHIL_Unit_Tracker:
 PHIL_memcheck: PHIL
 
 dSFMT.o:
-	$(CXX) $(DSFMT_CPPFLAGS) $(DSFMT_SRC) -c $(DSFMT_HDR) 
+	$(CXX) $(DSFMT_CXXFLAGS) $(DSFMT_SRC) -c $(DSFMT_HDR) 
 
 fsz: $(SNAPPY_LIB) Compression.o Global.h fsz.cc
 	$(CXX) -o fsz $(CXXFLAGS) $(LDFLAGS) Compression.o $(LFLAGS) fsz.cc
