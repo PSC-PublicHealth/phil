@@ -85,7 +85,7 @@ endif
 
 ###############################################
 
-%.o:%.c %.h
+%.o:%.cc %.h
 	$(CXX) $(CXXFLAGS) -c $< $(INCLUDES)
 
 OBJ =   Phil.o Global.o Age_Map.o Timestep_Map.o Utils.o Params.o Date.o Random.o \
@@ -144,7 +144,7 @@ DEPENDS: $(SRC) $(HDR)
 include DEPENDS
 
 $(SNAPPY_LIB):
-	cd $(SNAPPY_DIR); tar --strip-components=1 -xzvf snappy-1.0.5.tar.gz; CXX=$(CXX) ./configure --prefix=$(SNAPPY_DIR); make && make install; mv .libs lib;
+	cd $(SNAPPY_DIR); tar --strip-components=1 -xzvf snappy-1.0.5.tar.gz; CXX="$(CXX)" ./configure --prefix=$(SNAPPY_DIR); make && make install; mv .libs lib;
 
 
 PHIL.tar.gz: $(SRC) $(HDR)
