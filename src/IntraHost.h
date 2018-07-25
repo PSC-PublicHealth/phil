@@ -11,6 +11,7 @@ class Trajectory;
 class Disease;
 
 class IntraHost {
+
   public:
 
     /**
@@ -50,7 +51,9 @@ class IntraHost {
      * @return the days symptomatic
      */
     virtual int get_days_symp();
+
   protected:
+
     Disease *disease;
     int max_days;
 };

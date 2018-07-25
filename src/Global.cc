@@ -87,6 +87,7 @@ bool Global::Report_Distance_Of_Infection = false;
 bool Global::Report_Presenteeism = false;
 bool Global::Assign_Teachers = false;
 int Global::Print_GAIA_Data = 0;
+bool Global::Enable_Hetero_Infectivity = false;
 
 // per-strain immunity reporting off by default
 // will be enabled in Utils::phil_open_output_files (called from Phil.cc)
@@ -199,6 +200,10 @@ void Global::get_global_parameters() {
     Global::Assign_Teachers = temp_int;
     Params::get_param_from_string("report_epidemic_data_by_census_block", &temp_int);
     Global::Report_Epidemic_Data_By_Census_Block = (temp_int == 0 ? false : true);
+    Params::get_param_from_string("enable_hetero_infectivity",&temp_int);
+    Global::Enable_Hetero_Infectivity = temp_int;
+
+
     // GAIA params
     Params::get_param_from_string("print_gaia_data",&Global::Print_GAIA_Data);
     if (Global::Print_GAIA_Data) Global::Enable_Small_Grid = true;

@@ -575,3 +575,7 @@ simple_strains = 8
 enable_simple_strain_model = 0
 immunity_loss_mu[0] = 1080
 immunity_loss_sigma[0] = 1
+
+#### INFECTIVITY HETEROGENEITY
+
+enable_hetero_infectivity = 0

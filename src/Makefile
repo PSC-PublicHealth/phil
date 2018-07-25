@@ -103,7 +103,7 @@ OBJ =   Phil.o Global.o Age_Map.o Timestep_Map.o Utils.o Params.o Date.o Random.
 	Disease.o Infection.o Epidemic.o \
 	EvolutionFactory.o Evolution.o Strain.o Trajectory.o StrainTable.o \
 	Multistrain_Timestep_Map.o \
-	IntraHost.o DefaultIntraHost.o FixedIntraHost.o RSAIntraHost.o\
+	IntraHost.o DefaultIntraHost.o FixedIntraHost.o RSAIntraHost.o HeteroIntraHost.o\
 	Abstract_Grid.o Abstract_Cell.o \
 	Seasonality_Timestep_Map.o Seasonality.o \
 	Past_Infection.o MSEvolution.o Piecewise_Linear.o \

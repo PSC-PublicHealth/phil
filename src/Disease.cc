@@ -209,7 +209,7 @@ int Disease::get_days_recovered() {
 
     if (immunity_loss_mu > 0.0 && immunity_loss_sigma > 0.0) {
         // draw from normal distribution
-        days = floor(draw_normal(immunity_loss_mu, immunity_loss_sigma));
+        days = (int) floor(draw_normal(immunity_loss_mu, immunity_loss_sigma));
         if (days < 1) {
             days = 1;
         }

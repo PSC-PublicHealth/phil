@@ -171,6 +171,7 @@ class Global {
     static char US_state[];
     static char FIPS_code[];
 
+
     static char ErrorLogbase[];
     static int Track_infection_events;
     static int Track_vaccine_infection_events;
@@ -220,6 +221,8 @@ class Global {
     static bool Report_Presenteeism;
     static bool Assign_Teachers;
     static int Print_GAIA_Data;
+    // heterogenetity
+    static bool Enable_Hetero_Infectivity;
 
     // global singleton objects
     static Population Pop;

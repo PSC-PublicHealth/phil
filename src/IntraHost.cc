@@ -2,6 +2,7 @@
 
 #include "IntraHost.h"
 #include "DefaultIntraHost.h"
+#include "HeteroIntraHost.h"
 #include "FixedIntraHost.h"
 #include "Utils.h"
 #include "RSAIntraHost.h"
@@ -25,6 +26,9 @@ IntraHost *IntraHost :: newIntraHost(int type) {
     case 2:
         return new RSAIntraHost;
     //      return new ODEIntraHost;
+
+    case 3:
+        return new HeteroIntraHost;
 
     default:
         PHIL_WARNING("Unknown IntraHost type (%d) supplied to IntraHost factory.  Using DefaultIntraHost.\n", type);
