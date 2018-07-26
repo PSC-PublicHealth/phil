@@ -19,20 +19,8 @@ class HeteroIntraHost : public IntraHost {
     HeteroIntraHost();
     ~HeteroIntraHost();
 
-    /**
-     * Get the infection Trajectory
-     *
-     * @param infection
-     * @param loads
-     * @return a pointer to a Trajectory object
-     */
     Trajectory * get_trajectory(Infection * infection, Transmission::Loads * loads);
 
-    /**
-     * Set the attributes for the IntraHost
-     *
-     * @param dis the disease to which this IntraHost model is associated
-     */
     void setup(Disease *disease);
     int get_days_latent();
     int get_days_asymp();
