@@ -4,6 +4,7 @@
 #include <vector>
 #include <map>
 
+#include "Age_Map.h"
 #include "IntraHost.h"
 #include "Infection.h"
 #include "Trajectory.h"
@@ -11,7 +12,6 @@
 
 class Infection;
 class Trajectory;
-class Age_Map;
 
 class HeteroIntraHost : public IntraHost {
     // TODO Move reqd stuff from disease to here
@@ -20,6 +20,7 @@ class HeteroIntraHost : public IntraHost {
     ~HeteroIntraHost();
 
     Trajectory * get_trajectory(Infection * infection, Transmission::Loads * loads);
+    int hetero_infectivity_distribution;
 
     void setup(Disease *disease);
     int get_days_latent();
@@ -28,16 +29,16 @@ class HeteroIntraHost : public IntraHost {
     int get_days_susceptible();
     int get_symptoms();
 
-    double get_asymp_infectivity() {return asymp_infectivity;}
-    double get_symp_infectivity() {return symp_infectivity;}
+    double get_asymp_infectivity(int age);
+    double get_symp_infectivity(int age);
+
     int get_max_days() {return max_days;}
     double get_prob_symptomatic() {return prob_symptomatic;}
     int get_infection_model() {return infection_model;}
 
   private:
-
-    double asymp_infectivity;
-    double symp_infectivity;
+    double check_hetero_infectivity();
+    double hetero_infectivity_asymp_multiplier;
     int infection_model;
     int max_days_latent;
     int max_days_asymp;
@@ -47,10 +48,8 @@ class HeteroIntraHost : public IntraHost {
     double *days_asymp;
     double *days_symp;
     double prob_symptomatic;
-    void read_hetero_infectivity_params(int disease_id);
-    Age_Map ** hetero_infectivity_location_map;
-    Age_Map ** hetero_infectivity_scale_map;
-    int hetero_infectivity_distribution;
+    Age_Map * hetero_infectivity_location_map;
+    Age_Map * hetero_infectivity_scale_map;
 
 };
 
