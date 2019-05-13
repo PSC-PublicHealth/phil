@@ -431,7 +431,7 @@ void Utils::replace_csv_missing_data(char* out_str, char* in_str, const char* re
 
 void Utils::get_next_token(char * out_string, char ** input_string) {
     char *token;
-    token = strsep(input_string,",");
+    token = Utils::strsep(input_string,",");
 
     // if the field is empty, we report a value of "-1"
     if (*token == '\0') {
@@ -452,13 +452,13 @@ void Utils::get_next_token(char * out_string, char ** input_string) {
         while ((*c != '"') && (*c != '\0')) c++;    // search for closing quote
         if (*c == '\0') {                // no closing quote
             char *remainder;
-            remainder = strsep(input_string, "\"");
+            remainder = Utils::strsep(input_string, "\"");
             // concatenate remainder of field onto out_string
             (void) strncat(out_string, remainder, sizeof(out_string) - strlen(remainder) - 1);
             // add closing quote
             (void) strcat(out_string, "\"");
             // retrieve rest of field up to next comma (and verify that this is empty)
-            remainder = strsep(input_string, ",");
+            remainder = Utils::strsep(input_string, ",");
             assert(*remainder == '\0');
         }
     }
@@ -493,7 +493,7 @@ void Utils::normalize_white_space(char *s) {
     // printf("new_s = |%s|\n", new_s); fflush(stdout);
     int started = 0;
     char *token;
-    while ((token = strsep(&s, " \t")) != NULL) {
+    while ((token = Utils::strsep(&s, " \t")) != NULL) {
         if (*token != '\0') {
             // printf("token = |%s|\n", token); fflush(stdout);
             char *t = token;
@@ -504,6 +504,24 @@ void Utils::normalize_white_space(char *s) {
             // printf("new_s = |%s|\n", new_s); fflush(stdout);
         }
     }
+}
+
+// Own implementation of strsep since Windows doesn't have it
+// Credit to: https://stackoverflow.com/questions/8512958/is-there-a-windows-variant-of-strsep
+char* Utils::strsep(char** stringp, const char* delim) {
+    char* start = *stringp;
+    char* p;
+
+    p = (start != NULL) ? strpbrk(start, delim) : NULL;
+
+    if (p == NULL) {
+        *stringp = NULL;
+    } else {
+        *p = '\0';
+        *stringp = p + 1;
+    }
+
+    return start;
 }
 
 // TODO Utils::tokens class for split_by_delim

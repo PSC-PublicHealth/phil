@@ -141,6 +141,7 @@ void replace_csv_missing_data(char *out_str, char* in_str, const char * replacem
 void get_next_token(char * out_string, char ** input_string);
 void delete_char(char *s, char c, int maxlen);
 void normalize_white_space(char *s);
+char* strsep(char** stringp, const char* delim);
 
 class Tokens {
     std::vector< std::string > tokens;

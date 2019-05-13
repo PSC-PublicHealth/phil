@@ -69,10 +69,10 @@ void Place_List::get_parameters() {
             }
             while (fgets(line_string, PHIL_STRING_SIZE-1, fp) != NULL) {
                 line = line_string;
-                city = strsep(&line, "\t");
-                state = strsep(&line, "\t");
-                county = strsep(&line, "\t");
-                fips = strsep(&line, "\n");
+                city = Utils::strsep(&line, "\t");
+                state = Utils::strsep(&line, "\t");
+                county = Utils::strsep(&line, "\t");
+                fips = Utils::strsep(&line, "\n");
                 // printf("city = |%s| state = |%s| county = |%s| fips = |%s|\n",
                 // city,state,county,fips);
                 if (strcmp(Global::FIPS_code, fips) == 0) {
@@ -103,9 +103,9 @@ void Place_List::get_parameters() {
             }
             while (fgets(line_string, PHIL_STRING_SIZE-1, fp) != NULL) {
                 line = line_string;
-                fips = strsep(&line, "\t");
-                abbrev = strsep(&line, "\t");
-                state = strsep(&line, "\n");
+                fips = Utils::strsep(&line, "\t");
+                abbrev = Utils::strsep(&line, "\t");
+                state = Utils::strsep(&line, "\n");
                 if (strcmp(Global::FIPS_code, fips) == 0) {
                     found = 1;
                     break;
@@ -147,10 +147,10 @@ void Place_List::get_parameters() {
         }
         while (fgets(line_string, PHIL_STRING_SIZE-1, fp) != NULL) {
             line = line_string;
-            city = strsep(&line, "\t");
-            state = strsep(&line, "\t");
-            county = strsep(&line, "\t");
-            fips = strsep(&line, "\n");
+            city = Utils::strsep(&line, "\t");
+            state = Utils::strsep(&line, "\t");
+            county = Utils::strsep(&line, "\t");
+            fips = Utils::strsep(&line, "\n");
             // printf("city = |%s| state = |%s| county = |%s| fips = |%s|\n",
             // city,state,county,fips);
             sprintf(city_state, "%s %s", city, state);
@@ -192,10 +192,10 @@ void Place_List::get_parameters() {
         }
         while (fgets(line_string, PHIL_STRING_SIZE-1, fp) != NULL) {
             line = line_string;
-            city = strsep(&line, "\t");
-            state = strsep(&line, "\t");
-            county = strsep(&line, "\t");
-            fips = strsep(&line, "\n");
+            city = Utils::strsep(&line, "\t");
+            state = Utils::strsep(&line, "\t");
+            county = Utils::strsep(&line, "\t");
+            fips = Utils::strsep(&line, "\n");
             // printf("city = |%s| state = |%s| county = |%s| fips = |%s|\n",
             // city,state,county,fips);
             sprintf(county_state, "%s County %s", county, state);
@@ -236,9 +236,9 @@ void Place_List::get_parameters() {
         }
         while (fgets(line_string, PHIL_STRING_SIZE-1, fp) != NULL) {
             line = line_string;
-            fips = strsep(&line, "\t");
-            abbrev = strsep(&line, "\t");
-            state = strsep(&line, "\n");
+            fips = Utils::strsep(&line, "\t");
+            abbrev = Utils::strsep(&line, "\t");
+            state = Utils::strsep(&line, "\n");
             if (strcmp(Global::US_state, abbrev) == 0 || strcmp(Global::US_state, state) == 0) {
                 found = 1;
                 break;
