@@ -49,10 +49,10 @@ do
   sed -i "s/seed = .*/seed = ${seed}/" params.vaccinomics
 
   # Set the trans parameter
-  sed -i "s/trans[0] = .*/trans[0] = ${trans}/" params.vaccinomics
+  sed -i "s/trans\[0\] = .*/trans[0] = ${trans}/" params.vaccinomics
 
   # Set the efficacy parameter
-  sed -i "s/vaccine_dose_efficacy_values[0][0] = .*/vaccine_dose_efficacy_values[0][0] = 1 ${efficacy}/" params.vaccinomics
+  sed -i "s/vaccine_dose_efficacy_values\[0\]\[0\] = .*/vaccine_dose_efficacy_values[0][0] = 1 ${efficacy}/" params.vaccinomics
 
   # Run PHIL
   ${PHIL_HOME}/bin/phil params.vaccinomics
