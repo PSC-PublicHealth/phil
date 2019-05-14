@@ -1,6 +1,8 @@
 #!/bin/bash
 
+# code_dir should be the base phil/ directory
 code_dir=$1
+# input_dir is where you have your params.vaccinomics and primary_cases_vaccinomics and where you want your output files
 input_dir=$2
 trans=$3
 efficacy=$4
