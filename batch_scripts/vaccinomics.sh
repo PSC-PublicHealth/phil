@@ -16,7 +16,7 @@ cp ${input_dir}/primary_cases_vaccinomics.txt ${results_dir}/primary_cases_vacci
 
 cd ${results_dir}
 
-for i in seq `1 30`
+for i in {1..30};
 do
   day_of_week=$(shuf -i 0-6 -n 1)
   seed=$RANDOM
