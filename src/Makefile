@@ -9,7 +9,7 @@ SNAPPY_HDR = $(SNAPPY_INC_DIR)/snappy.h
 
 INCLUDE_DIRS = -I$(DSFMT_DIR) -I$(SNAPPY_INC_DIR)
 
-CPP = g++ -std=c++11 
+CXX = g++ -std=c++11 
 
 ################   Multithreading   ###############################
 # For multithreading, NCPU should be set here or as an argument to make.
@@ -33,7 +33,7 @@ else ifeq ($(shell echo $(OS) | cut -f1 -d_),CYGWIN)
 NCPU ?=  $(shell grep -c ^processor /proc/cpuinfo)
 SNAPPY_LIB = $(SNAPPY_DIR)/lib/libsnappy.la 
 else ifeq ($(OS),Darwin)
-CPP = g++-5 -std=c++11
+CXX = g++-5 -std=c++11
 NCPU ?= $(shell sysctl -n hw.ncpu)
 SNAPPY_LIB = $(SNAPPY_DIR)/lib/libsnappy.dylib
 M64 = -m64
@@ -47,29 +47,26 @@ LOGGING_PRESET_1 = -DPHILWARNING
 LOGGING_PRESET_2 = -DPHILSTATUS -DPHILWARNING
 LOGGING_PRESET_3 = -DPHILVERBOSE -DPHILSTATUS -DPHILWARNING -DPHILDEBUG
 
-DSFMT_CPPFLAGS = -g -O3 -DDSFMT_MEXP=19937 -DDSFMT_DO_NOT_USE_OLD_NAMES -finline-functions -fomit-frame-pointer -DNDEBUG \
+DSFMT_CXXFLAGS = -g -O3 -DDSFMT_MEXP=19937 -DDSFMT_DO_NOT_USE_OLD_NAMES -finline-functions -fomit-frame-pointer -DNDEBUG \
 -fno-strict-aliasing --param max-inline-insns-single=1800
 
 DSFMT_SRC = $(DSFMT_DIR)/dSFMT.c
 DSFMT_HDR = $(DSFMT_DIR)/dSFMT.h $(DSFMT_DIR)/dSFMT-params19937.h
 
 # use this for development:
-## CPPFLAGS = -g -O2 $(LOGGING_PRESET_3) -Wall
+## CXXFLAGS = -g -O2 $(LOGGING_PRESET_3) -Wall
 
 # use one of these for profiling
-# CPPFLAGS = -g $(M64) -O3 $(LOGGING_PRESET_3) # -DNDEBUG
-# CPPFLAGS = -pg $(M64) -O2 -DNDEBUG $(LOGGING_PRESET_3) -fno-inline-functions -fno-inline-functions-called-once -fno-optimize-sibling-calls -fno-omit-frame-pointer
+# CXXFLAGS = -g $(M64) -O3 $(LOGGING_PRESET_3) # -DNDEBUG
+# CXXFLAGS = -pg $(M64) -O2 -DNDEBUG $(LOGGING_PRESET_3) -fno-inline-functions -fno-inline-functions-called-once -fno-optimize-sibling-calls -fno-omit-frame-pointer
 # Use one of these for production:
 
 ## Use this to run with multiple threads
-CPPFLAGS = -g $(M64) -O3 -fopenmp $(LOGGING_PRESET_3) -DNCPU=$(NCPU) -fno-omit-frame-pointer $(INCLUDE_DIRS) 
-PHIL_memcheck: CPPFLAGS = -g $(M64) -O0 -fopenmp $(LOGGING_PRESET_3) -DNCPU=$(NCPU) -fno-omit-frame-pointer $(INCLUDE_DIRS)
+CXXFLAGS = -g $(M64) -O3 -fopenmp $(LOGGING_PRESET_3) -DNCPU=$(NCPU) -fno-omit-frame-pointer $(INCLUDE_DIRS) 
+PHIL_memcheck: CXXFLAGS = -g $(M64) -O0 -fopenmp $(LOGGING_PRESET_3) -DNCPU=$(NCPU) -fno-omit-frame-pointer $(INCLUDE_DIRS)
 
 ## Use this to make reproducible serial runs
-# CPPFLAGS = -g $(M64) -O3 $(LOGGING_PRESET_3) -DNCPU=1 #-fast #-Wall
-
-CXX = $(CPP)
-CXXFLAGS = $(CPPFLAGS)
+# CXXFLAGS = -g $(M64) -O3 $(LOGGING_PRESET_3) -DNCPU=1 #-fast #-Wall
 
 LDFLAGS = -L$(SNAPPY_DIR)/lib/
 
@@ -88,8 +85,8 @@ endif
 
 ###############################################
 
-%.o:%.c %.h
-	$(CPP) $(CPPFLAGS) -c $< $(INCLUDES)
+%.o:%.cc %.h
+	$(CXX) $(CXXFLAGS) -c $< $(INCLUDES)
 
 OBJ =   Phil.o Global.o Age_Map.o Timestep_Map.o Utils.o Params.o Date.o Random.o \
 	Geo_Utils.o Cell.o Grid.o Large_Grid.o Large_Cell.o Small_Grid.o Small_Cell.o Travel.o \
@@ -119,35 +116,35 @@ MD5 := PHIL.md5
 all: PHIL PHIL.tar.gz fsz $(MD5)
 
 PHIL: $(SNAPPY_LIB) $(OBJ) dSFMT.o
-	$(CPP) -o $(PHIL_EXECUTABLE_NAME) $(CPPFLAGS) $(LDFLAGS) $(OBJ) dSFMT.o $(LFLAGS) -ldl
+	$(CXX) -o $(PHIL_EXECUTABLE_NAME) $(CXXFLAGS) $(LDFLAGS) $(OBJ) dSFMT.o $(LFLAGS) -ldl
 	mkdir -p ../bin
 	cp $(PHIL_EXECUTABLE_NAME) ../bin
 
 #LIBPHIL: $(SNAPPY_LIB) $(OBJ) dSFMT.o
-#	$(CPP) -shared -fPIC  -o libphil.so $(CPPFLAGS) $(LDFLAGS) $(OBJ) dSFMT.o $(LFLAGS) -ldl
+#	$(CXX) -shared -fPIC  -o libphil.so $(CXXFLAGS) $(LDFLAGS) $(OBJ) dSFMT.o $(LFLAGS) -ldl
 
 PHIL_Unit_Tracker: 
-	cd TestSuite/Tracker; $(CPP) -g -O0 -fopenmp -DUNIT_TEST=1 -I../../ Tracker_Unit_Test.cc -c -o Tracker_Unit_Test.o
-	cd TestSuite/Tracker; $(CPP) -g -O0 -fopenmp -o PHIL_Unit_Tracker -DUNIT_TEST=1 -I../../ ../../Global.o Tracker_Unit_Test.o
+	cd TestSuite/Tracker; $(CXX) -g -O0 -fopenmp -DUNIT_TEST=1 -I../../ Tracker_Unit_Test.cc -c -o Tracker_Unit_Test.o
+	cd TestSuite/Tracker; $(CXX) -g -O0 -fopenmp -o PHIL_Unit_Tracker -DUNIT_TEST=1 -I../../ ../../Global.o Tracker_Unit_Test.o
 
 
 PHIL_memcheck: PHIL
 
 dSFMT.o:
-	$(CPP) $(DSFMT_CPPFLAGS) $(DSFMT_SRC) -c $(DSFMT_HDR) 
+	$(CXX) $(DSFMT_CXXFLAGS) $(DSFMT_SRC) -c $(DSFMT_HDR) 
 
 fsz: $(SNAPPY_LIB) Compression.o Global.h fsz.cc
-	$(CPP) -o fsz $(CPPFLAGS) $(LDFLAGS) Compression.o $(LFLAGS) fsz.cc
+	$(CXX) -o fsz $(CXXFLAGS) $(LDFLAGS) Compression.o $(LFLAGS) fsz.cc
 	mkdir -p ../bin
 	cp fsz ../bin
 
 DEPENDS: $(SRC) $(HDR)
-	$(CPP) -MM $(SRC) > DEPENDS
+	$(CXX) -MM $(SRC) > DEPENDS
 
 include DEPENDS
 
 $(SNAPPY_LIB):
-	cd $(SNAPPY_DIR); tar --strip-components=1 -xzvf snappy-1.0.5.tar.gz; CPP=$(CPP) CXX=$(CPP) ./configure --prefix=$(SNAPPY_DIR); make && make install; mv .libs lib;
+	cd $(SNAPPY_DIR); tar --strip-components=1 -xzvf snappy-1.0.5.tar.gz; CXX="$(CXX)" ./configure --prefix=$(SNAPPY_DIR); make && make install; mv .libs lib;
 
 
 PHIL.tar.gz: $(SRC) $(HDR)
