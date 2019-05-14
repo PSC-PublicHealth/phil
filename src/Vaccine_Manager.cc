@@ -119,9 +119,11 @@ Vaccine_Manager::Vaccine_Manager(Population *_pop):
     Params::get_param_from_string("vaccine_coverage_by_age",&vacc_cov_by_age);
     if (vacc_cov_by_age) {
         vaccine_coverage_by_age = true;
-        //current_policy = VACC_AGE_SPEC_COVERAGE_PRIORITY;
-        //vaccine_priority_only = true;
-        current_policy = VACC_AGE_SPEC_COVERAGE_MULTI_VACCINE_PRIORITY;
+        if (num_vaccs > 1) {
+            current_policy = VACC_AGE_SPEC_COVERAGE_PRIORITY;
+        } else {
+            current_policy = VACC_AGE_SPEC_COVERAGE_MULTI_VACCINE_PRIORITY;
+        }
         vaccine_priority_only = true;
         vaccine_coverage_age_maps = new Age_Map*[vaccine_package->get_num_vaccines()];
         for (int i=0; i<vaccine_package->get_num_vaccines(); ++i) {
