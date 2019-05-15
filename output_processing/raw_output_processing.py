@@ -62,10 +62,10 @@ def main(results_dir: str, people_file: str, number_of_processes: int) -> None:
     for process in jobs:
         process.join()
 
-    pd.DataFrame(ages_vaccinated).T.to_csv('ages_vaccinated.csv', index_label='age')
-    pd.DataFrame(infections_by_age).T.to_csv('infections_by_age.csv', index_label='age')
-    pd.DataFrame(new_infections_by_day).T.to_csv('new_infections_by_day.csv', index_label='day')
-    pd.DataFrame(total_infected_by_day).T.to_csv('total_infected_by_day.csv', index_label='day')
+    pd.DataFrame(ages_vaccinated).T.to_csv('{}/ages_vaccinated.csv'.format(results_dir), index_label='age')
+    pd.DataFrame(infections_by_age).T.to_csv('{}/infections_by_age.csv'.format(results_dir), index_label='age')
+    pd.DataFrame(new_infections_by_day).T.to_csv('{}/new_infections_by_day.csv'.format(results_dir), index_label='day')
+    pd.DataFrame(total_infected_by_day).T.to_csv('{}/total_infected_by_day.csv'.format(results_dir), index_label='day')
 
 
 def assign_realizations_to_processes(results_dir: str, number_of_processes: int) -> Generator[List[Path], None, None]:
