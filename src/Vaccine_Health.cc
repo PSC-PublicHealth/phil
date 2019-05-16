@@ -70,7 +70,7 @@ void Vaccine_Health::update(int day, int age) {
         Disease* s = Global::Pop.get_disease(0);
         person->become_immune(s);
         effective = true;
-        if (Global::Debug < 1) {
+        if (Global::Debug > 1) {
             cout << "Agent " << person->get_id()
                  << " has become immune from dose "<< current_dose
                  << "on day " << day << "\n";
@@ -87,7 +87,7 @@ void Vaccine_Health::update(int day, int age) {
             current_dose++;
             days_to_next_dose = day + vaccine->get_dose(current_dose)->get_days_between_doses();
             int vaccine_dose_priority = vaccine_manager->get_vaccine_dose_priority();
-            if (Global::Debug < 1) {
+            if (Global::Debug > 1) {
                 cout << "Agent " << person->get_id()
                      << " being put in to the queue with priority " << vaccine_dose_priority
                      << " for dose " << current_dose
