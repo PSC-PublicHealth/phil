@@ -1,5 +1,6 @@
 from argparse import ArgumentParser
 import ast
+import datetime
 from multiprocessing import Process, Queue
 import pandas as pd
 from pathlib import Path
@@ -101,16 +102,22 @@ class RealizationProcessor:
     def __init__(self, directory: Path, people_to_age_mapping: Dict[int, int]) -> None:
         self.output_file = directory / "OUT" / "report1.json_lines"
         self.people_to_age_mapping = people_to_age_mapping
+        self.start_date = None
         # Ranges are hardcoded for simplicity
         self.ages_vaccinated = {age: 0 for age in range(110)}
         self.infections_by_age = {age: 0 for age in range(110)}
-        self.new_infections_by_day = {day: 0 for day in range(200)}
-        self.total_infected_by_day = {day: 0 for day in range(200)}
+        # Realizations start on some date between 2012-01-01 and 2012-01-07
+        earliest_date = datetime.datetime.fromisoformat("2012-01-01")
+        self.new_infections_by_day = {earliest_date + datetime.timedelta(days=day): 0 for day in range(200)}
+        self.total_infected_by_day = {earliest_date + datetime.timedelta(days=day): 0 for day in range(200)}
 
     def process(self) -> Tuple[Dict[int, int], Dict[int, int], Dict[int, int], Dict[int, int]]:
         with self.output_file.open() as report:
-            # Discard the header
-            report.readline()
+            # Get the start date from the header
+            line = report.readline()
+            header = ast.literal_eval(line)
+            start_date = header['start_date']
+            self.start_date = datetime.datetime.fromisoformat(start_date)
 
             while True:
                 line = report.readline()
@@ -143,13 +150,15 @@ class RealizationProcessor:
         self.infections_by_age[age_infected] += 1
 
         day_infected = event['infectious']
+        date_infected = self.start_date + datetime.timedelta(days=day_infected)
 
         # new_infections_by_day
-        self.new_infections_by_day[day_infected] += 1
+        self.new_infections_by_day[date_infected] += 1
 
         # total_infected_by_day
         for day in range(day_infected, event['recovered']):
-            self.total_infected_by_day[day] += 1
+            date = self.start_date + datetime.timedelta(days=day)
+            self.total_infected_by_day[date] += 1
 
 
 if __name__ == '__main__':
